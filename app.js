@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const { initializeApp } = require("firebase/app");
 const { getAnalytics } = require("firebase/analytics");
+const { getAuth, createUserWithEmailAndPassword } = require("firebase/auth");
 
 // setup express instance
 const port = process.env.port || 9000;
@@ -38,15 +39,19 @@ const fb = initializeApp(firebaseConfig);
 // listen to routes
 
 // root route
-
+app.get("/", (req,res) => {
+    res.render("home");
+})
 // login route
-app.get("/login", (req, res) => {
-    res.render("login", {a:"from server"});
-});
 
 // signup route
-app.get("/signup", (req, res) => {
-
+app.route("/signup")
+.get((req, res) => {
+    res.render("signup");
+}).post((req, res) => {
+    // get data from request
+    let data = req.body;
+    console.log(data);
 });
 
 

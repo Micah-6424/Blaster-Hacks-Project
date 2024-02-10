@@ -1,0 +1,13 @@
+h1 {
+  color: var(--white_text);
+  font-family: var(--main_font);
+}
+
+.box-one {
+  background-color: var(--main_blue);
+}/*# sourceMappingURL=home.css.map */
+
+h2{
+  color: var(--black_text);
+  font-family: var(--main_font);
+}
