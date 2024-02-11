@@ -1,13 +1,41 @@
 <%- include('partials/header') %>
+<%- include('partials/brand_name') %>
 <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <!-- include brand name partial -->
-    <%- include('partials/brand_name') %>
-    <input id="username" placeholder="username" name="username">
-    <input id="password" type="password" placeholder="password" name="password">
-    <button id="submit">submit</button>
+    <div class="container">
+        <div class = "left-side-container">
+            <header id="head">Welcome Back</header>
+            <hr id="hr">
+            <div id="link_to_si">
+                <p>Don't have an account? <a href="/signup">SIGN UP</a><p>
+            </div>
+        </div>
 
-    <script src="js/login.js"></script>
+    <div class = "right-side-container">
+    <!-- include brand name partial -->
+        <div class="input-space"></div>
+        <input class="input-large" id="username" placeholder="username" name="username">
+        <div class="input-space"></div>
+        <input class="input-large" id="password" type="password" placeholder="password" name="password">
+        <div class="input-space"></div>
+
+        <div class="input-space"></div>
+        <img src="../imgs/loginPaypal.png" alt="paypal login img" width="400px">
+        <div class="input-space"></div>
+        <div class="input-space"></div>
+        
+        <p>By pressing the SIGN UP button below, you are agreeing to our Terms of Services and 
+        Conditions and acknowledge the Privacy Notice</p>
+
+        
+        <button class="btn-large" id="submit">LOG IN</button>
+
+        <script src="js/login.js"></script>
+    </div>
+
+
+    
 </body>
 </html>
+

@@ -1,7 +1,51 @@
-.logo-banner {
-  background-color: var(--main_blue);
+.container {
+  display: flex;
+  align-items: center;
 }
 
-#brand-name {
-  color: white;
+.right-side-container {
+  margin-left: 100px;
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.right-side-container #username {
+  border: 0;
+  border-bottom: 3px solid;
+}
+.right-side-container #password {
+  border: 0;
+  border-bottom: 3px solid;
+}
+
+.left-side-container {
+  margin-right: 100px;
+  flex: 1 0 auto;
+  text-align: center;
+}
+.left-side-container #hr {
+  height: 5px;
+}
+.left-side-container #head {
+  font-size: 500%;
+}
+
+.btn-large {
+  padding: 10px 20px; /* Increase padding to make buttons larger */
+  font-size: 16px; /* Increase font size for better visibility */
+}
+
+.input-large {
+  padding: 50px; /* Increase padding to make input boxes larger */
+  font-size: 20px; /* Increase font size for better visibility */
+  width: 500px; /* Increase width as needed */
+  height: 30px;
+}
+
+.input-space {
+  height: 20px;
 }/*# sourceMappingURL=login.css.map */

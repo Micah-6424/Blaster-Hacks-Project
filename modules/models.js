@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
     posts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post"
-    }]
+    }],
+    
 });
 
 // create Post Schema
@@ -21,10 +22,15 @@ const postSchema = new mongoose.Schema({
     img: String,
     moneyNeeded: Number,
     moneyCollected: Number,
+    time: {
+        type: Date,
+        default: Date.now
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     }
+    
 });
 
 // add passport-local-mongoose to userSchema

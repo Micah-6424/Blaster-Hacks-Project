@@ -171,6 +171,86 @@ app.get("/secret", (req,res) =>  {
     res.send(req.user.toString());
 })
 
+app.route("/help")
+.get((req,res) => {
+    if(!req.isAuthenticated()){
+        res.redirect("/");
+        return;
+    }
+    res.render("help");
+})
+.post(async (req,res) => {
+    if(!req.isAuthenticated()){
+        res.redirect("/");
+        return;
+    }
+    let {title,description,asking_price} = req.body;
+    console.log(asking_price);
+    asking_price = parseInt(asking_price);
+    console.log(asking_price);
+
+    if(!(asking_price != 5 || asking_price != 10 || asking_price != 20)) {
+        res.status(404).send("Invalid asking price");
+        return;
+    }
+
+    if(title.length <10){
+        res.status(404).send("Invalid title");
+        return;
+    }
+
+    if(title.length > 50){
+        res.status(404).send("Invalid title");
+        return;
+    }
+
+    if(description.length < 30){
+        res.status(404).send("Invalid description");
+        return;
+    }
+
+    if(description.length > 500){
+        res.status(404).send("Invalid description");
+        return;
+    }
+
+    let post = new Post({
+        title: sanitize(title),
+        content: sanitize(description),
+        moneyNeeded: sanitize(asking_price),
+        moneyCollected: 0,
+        user: req.user
+    });
+
+    try {
+        await post.save();
+        let user;
+        try {
+            user = await User.findById(req.user._id);
+            console.log("was a user found???");
+            console.log(user);
+        } catch(e) {
+            console.log(e);
+            res.status(404).send("Error creating help request in user");
+            return;
+        }
+        user.posts.push(post);
+        try {
+            await user.save();
+        } catch(e) {
+            console.log(e);
+            res.status(404).send("Error creating help request in user");
+            return;
+        }
+        res.status(200).send("Post created");
+        return;
+    } catch(e) {
+        console.log(e);
+        res.status(404).send("Error creating help request");
+        return;
+    }
+});
+
 
 // listen to port
 app.listen(port, () => {

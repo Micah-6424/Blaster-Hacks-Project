@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/help.css">
+</head>
+<body>
+    <header>
+        <%- include('partials/brand_name') %>
+    </header>
+    <input type="text"name="title" placeholder="title:" id="title">
+    <input type="text"name="description" placeholder="description:" id="description">
+    <!-- make a dropdown selector -->
+    <select name="asking_price" id="asking_price">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20 </option>
+    </select>
+    <button id="submit">Submit</button>
+
+    <script src="js/help.js"></script>
+</body>
