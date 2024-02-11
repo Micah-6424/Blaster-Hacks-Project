@@ -3,33 +3,65 @@
 </head>
 <body>
     <header>
-        <div class="logo-banner"> 
-            <h1 id="brand-name">This is the name</h1>
-        </div>
-        <div class="navigation">
-            <div class="left">
-                <!-- about us -->
+        <%- include('partials/brand_name') %>
+        <!-- <div class="navigation"> -->
+            <!-- <div class="left">
+                about us
                 <a class="nav-item" href="/about">About</a>
-                <!-- who we serve -->
+                who we serve
                 <a class="nav-item" href="/serve">who we serve</a>
             </div>
 
             <div class="right">
-                <!-- login -->
+                login
                 <a class="nav-item" href="/login">Login</a>
-                <!-- sign up -->
+                sign up
                 <a class="nav-item" href="/signup">Sign Up</a>
-            </div>
-        </div>
+            </div> -->
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" style="cursor: pointer;">About Us</a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" style="cursor: pointer;">Who We Serve</a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" style="cursor: pointer;">Log In</a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ">
+                  <li class="nav-item">
+                    <button class="btn btn-primary" style="cursor: pointer;">Sign Up Free </button>
+                  </li>
+                </ul>
+              </nav>
+        <!-- </div> -->
     </header>
     <main>
         <div id="page1">
-            <button id="donate">Donate Today!</button>
-            <button id="receive-help">Receive Help Now!</button>
+            <div id="main_text">
+                <p>Small donations can</p>
+                <p>make big changes</p>
+            </div>
+            
+            <div class="main_btn_comtainer">
+                <button id="donate" class="action_buttons">DONATE TODAY</button>
+                <br class="button_spacer"/>
+                <button id="receive-help" class="action_buttons">RECEIVE HELP</button>
+            </div>
         </div>
         <div id="page2">
             <div></div>
         </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </body>
 </html>

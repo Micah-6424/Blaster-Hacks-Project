@@ -58,6 +58,10 @@ app.route("/signup")
 .get((req, res) => {
     res.render("signup");
 }).post(async (req, res) => {
+    if(req.isAuthenticated()){
+        res.redirect("/home");
+    }
+
     // get data from request
     let {name,username,password,email} = req.body
 
@@ -90,6 +94,15 @@ app.route("/signup")
             });
         } else { //a user is already registered with that email
             console.log("user already registered");
+        }
+});
+
+
+app.get("/login", (req,res) => {
+        res.render("login");
+    }).post(async (req, res) => {
+        if(req.isAuthenticated()){
+            res.redirect("/home");
         }
 });
 

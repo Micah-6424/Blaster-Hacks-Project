@@ -1,8 +1,51 @@
-h1 {
-  color: var(--);
-  font-family: var(--main_font);
+* {
+  font-family: --main_font;
 }
 
-.logo-banner {
-  background-color: var(--main_blue);
+h1 {
+  text-align: center;
+}
+
+#brand-name {
+  text-align: center !important;
+}
+
+#page1 {
+  background: url("../imgs/squad.jpg");
+  background-size: cover;
+  width: 100vw;
+  height: 95vh;
+  text-align: center;
+}
+#page1 .action_buttons {
+  background-color: rgba(255, 255, 255, 0.8745098039);
+  border-radius: 50px;
+  width: 278px;
+  height: 75px;
+  border: 0px;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 1.3em;
+  transition: all 0.1s ease;
+  position: relative;
+  top: 33vh;
+}
+#page1 .action_buttons:hover {
+  color: #000;
+  background-color: #ffffff;
+}
+#page1 #main_text {
+  position: relative;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  color: white;
+  font-size: 4em;
+}
+
+nav.navbar {
+  background-color: white !important;
+}
+nav.navbar a.nav-link {
+  color: black !important;
 }/*# sourceMappingURL=home.css.map */
