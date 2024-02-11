@@ -48,4 +48,8 @@ nav.navbar {
 }
 nav.navbar a.nav-link {
   color: black !important;
+}
+
+.hidden {
+  display: none;
 }/*# sourceMappingURL=home.css.map */

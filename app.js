@@ -294,7 +294,7 @@ app.route("/feed")
 });
 
 
-app.route("/post/:id")
+app.route("/posts/:id")
 .get(async (req,res) => {
     if(!req.isAuthenticated()){
         res.redirect("/");
@@ -311,11 +311,50 @@ app.route("/post/:id")
     }
 
     let {name,username,email} = req.user;
-    res.render("post.ejs", {post: post, name,username,email});
+    res.render("focusPost.ejs", {post: post, name,username,email});
+   
 });
+
+app.post("/donate", async (req,res) => {
+    if(!req.isAuthenticated()){
+        res.redirect("/");
+        return;
+    }
+    let {post_id,amount_donate} = req.body;
+    // get the post in the database and update its moneyCollected
+    let post;
+    try {
+        post = await Post.findById(post_id);
+    } catch(e) {
+        console.log(e);
+        res.status(404).send("Error finding post");
+        return;
+    }
+
+    post.moneyCollected += amount_donate;
+    try {
+        await post.save();
+    } catch(e) {
+        console.log(e);
+        res.status(404).send("Error saving post");
+        return;
+    }
+
+    res.status(200).send("Donation successful");
+});
+
+app.get("/serve", (req,res) => {
+    res.render("serve");
+})
+
+app.get("/about", (req,res) => {
+    res.render("about");
+})
 
 
 // listen to port
 app.listen(port, () => {
     console.log(`Server is running on port ${port}.`);
 });
+
+

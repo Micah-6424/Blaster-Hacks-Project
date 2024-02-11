@@ -1,0 +1,98 @@
+
+body {
+    overflow: hidden;
+}
+
+.title_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* make cute and pink and bubbly  */
+    background-color: rgb(60, 74, 148);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+
+    /* center horiszontally */
+    margin: 0 auto;
+
+
+}
+spacer {
+    height: 100px;
+}
+h1,h4 {
+    text-align: left;
+    margin-bottom: 20px;
+}
+.title_container {
+    position: relative;
+}
+.title_container span {
+    position: absolute;
+    bottom: 5%;
+    right: 2%;
+    float : right;
+    /* position: absolute; */
+    /* bottom: 0; */
+}
+
+h4 {
+    color: #ababab;
+}
+
+
+.content_container {
+    /* make it a good container for a good amount of text, not cute but functional */
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    font-size: 2ch;
+    position: relative;
+}
+
+.content_container span {
+    position: absolute;
+    bottom: 5%;
+    right: 2%;
+    float : right;
+    /* position: absolute; */
+    /* bottom: 0; */
+}
+
+.donate_container {
+    /* make it pop! */
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+
+    /* center horizontally */
+    /* fill full width */
+    /* width: 100%; */
+    /* transform: translateX(-30); */
+
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    background-color: rgb(60, 74, 148);
+    padding: 20px;
+    height: 100px;
+
+}
+.donate_container button {
+    /* make it cute and pink and bubbly and BIG*/
+    color: white;
+    background-color: #ff6b6b;
+    font-size: 2.5ch;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 30px;
+    border: none;
+    cursor: pointer;
+}
