@@ -14,16 +14,18 @@
     </select>> -->
     <div class="encompassing"> 
         <div class="m_buttons">
-            <button class="amount" id="five">$5</button>
-            <button class="amount" id="ten">$10</button>
-            <button class="amount" id="twenty">$20</button>
+            <button class="amount" value="5" id="five"><p>$5</p></button>
+            <button class="amount" value="10"id="ten"><p>$10</p></button>
+            <button class="amount" value="20"id="twenty"><p>$20</p></button>
+        </div>
+        <hr>
     </div>
 
         <div class="information">
             <div class="entry1">
                 <input type="text"name="title" placeholder="title:" id="title">
                 <div class="input-space"></div>
-                <input type="text"name="description" placeholder="description:" id="description">
+                <textarea type="text" name="description" placeholder="description:" id="description"></textarea>
             </div>
 
             <div class="entry2">
@@ -35,7 +37,7 @@
                 <%}%>
                 </select>
                 <div class="input-space"></div>
-                <button  id="submit">Submit</button>
+                <button  id="submit">SUBMIT</button>
 
             </div>
         </div>

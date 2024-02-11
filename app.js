@@ -92,7 +92,7 @@ app.route("/signup")
     // create user with mongo and using passport to hash password
     let models;
     try {
-        models = await User.find({username:username.toLowerCase()});
+        models = await User.find({username:username});
     } catch(e) {
         console.log(e);
     }
@@ -101,7 +101,7 @@ app.route("/signup")
         if (models.length == 0) { //new user
             User.register({
                 "name":sanitize(name),
-                "username":sanitize(username.toLowerCase()),
+                "username":sanitize(username),
                 "email":sanitize(email.toLowerCase())
             }, sanitize(password), function (err, user) {
                 console.log("user registered");
@@ -139,7 +139,7 @@ app.route("/login").get((req,res) => {
         let {username,password} = req.body;
         // authenticate user
         const user = new User({
-            username: username.toLowerCase(),
+            username: username,
             password: password
         });
 
@@ -175,10 +175,10 @@ app.get("/secret", (req,res) =>  {
 
 app.route("/help")
 .get((req,res) => {
-    // if(!req.isAuthenticated()){
-    //     res.redirect("/");
-    //     return;
-    // }
+    if(!req.isAuthenticated()){
+        res.redirect("/");
+        return;
+    }
 
 
     // read tags.txt and split by comma into an array
@@ -190,7 +190,7 @@ app.route("/help")
         res.redirect("/");
         return;
     }
-    let {title,description,asking_price} = req.body;
+    let {title,description,asking_price,tag} = req.body;
     console.log(asking_price);
     asking_price = parseInt(asking_price);
     console.log(asking_price);
@@ -210,6 +210,13 @@ app.route("/help")
         return;
     }
 
+    let tags = fs.readFileSync(path.join(__dirname, 'tags.txt'), 'utf8').split(",");
+
+    if(!tags.includes(tag)){
+        res.status(404).send("Invalid tag");
+        return;
+    }
+
     if(description.length < 30){
         res.status(404).send("Invalid description");
         return;
@@ -225,6 +232,7 @@ app.route("/help")
         content: sanitize(description),
         moneyNeeded: sanitize(asking_price),
         moneyCollected: 0,
+        tag: tag,
         user: req.user
     });
 
@@ -255,6 +263,25 @@ app.route("/help")
         res.status(404).send("Error creating help request");
         return;
     }
+});
+
+
+app.route("/feed")
+.get(async (req,res) => {
+    let posts;
+    try {
+        posts = await Post.find({});
+    } catch(e) {
+        console.log(e);
+        res.status(404).send("Error getting posts");
+        return;
+    }
+
+    // sort posts by new Date (newest first)
+    posts.sort((a,b) => {
+        return b.time - a.time;
+    });
+    res.send({posts: posts});
 });
 
 

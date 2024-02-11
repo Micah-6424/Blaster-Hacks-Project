@@ -1,10 +1,11 @@
 let title = document.getElementById("title");
 let description = document.getElementById("description");
-let asking_price = document.getElementById("asking_price");
 let submit = document.getElementById("submit");
+let tag = document.getElementById("tag")
+
 
 submit.addEventListener("click", async () => {
-    if(title.value === "" || description.value === "" || asking_price.value === ""){
+    if(title.value === "" || description.value === "" || selectedAmount == 0){
         alert("All fields are required");
         return;
     }
@@ -32,7 +33,8 @@ submit.addEventListener("click", async () => {
     let data = {
         title: title.value,
         description: description.value,
-        asking_price: asking_price.value
+        asking_price: selectedAmount,
+        tag: tag.value
     };
 
     let response = await fetch("/help", {
@@ -61,5 +63,6 @@ document.querySelectorAll(".amount").forEach((button) => {
             button.classList.remove("button_clicked");
         });
         button.classList.add("button_clicked");
+        selectedAmount = Number.parseInt(button.value);
     });
 });
