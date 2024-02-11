@@ -1,10 +1,14 @@
+
+
 .container {
     display: flex;
     float: left;
+    align-items: center;
 }
 
 
 .right-side-container {
+    text-align: center;
     flex: 0 0 auto;
     border: 3px solid;
     height: 100vh;
@@ -27,15 +31,44 @@
         border: 0;
         border-bottom: 3px solid;
     }
+
+    .input1 {
+        display: flex;
+    }
+    
+    .input2 {
+        margin: 10px; /* Add margin for spacing */
+        padding: 5px;
+        width: 200px; /* Adjust width as needed */
+        
+    }
 }
 
 .left-side-container {
-    flex: 0 0 auto;
+    margin-right: 20px;
+    flex: 1 0 auto;
     text-align: center;
     #hr{
-        height: 3px;
+        height: 5px;
     }
     #head{
         font-size: 500%;
     }
+}
+
+.btn-large {
+    padding: 10px 20px; /* Increase padding to make buttons larger */
+    font-size: 16px; /* Increase font size for better visibility */
+}
+
+.input-large {
+    padding: 50px; /* Increase padding to make input boxes larger */
+    font-size: 20px; /* Increase font size for better visibility */
+    width: 500px; /* Increase width as needed */
+    height: 50px;
+}
+
+.input-space {
+    width: 20px; /* Add space between input fields */
+    height: 30px;
 }

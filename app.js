@@ -101,7 +101,7 @@ app.route("/signup")
                 "name":sanitize(name),
                 "username":sanitize(username.toLowerCase()),
                 "email":sanitize(email.toLowerCase())
-            }, sanitize(password.toLowerCase()), function (err, user) {
+            }, sanitize(password), function (err, user) {
                 console.log("user registered");
                 if (err) {
                     console.log(err);
@@ -138,7 +138,7 @@ app.route("/login").get((req,res) => {
         // authenticate user
         const user = new User({
             username: username.toLowerCase(),
-            password: password.toLowerCase()
+            password: password
         });
 
 
