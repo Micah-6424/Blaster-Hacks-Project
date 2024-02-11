@@ -1,12 +1,12 @@
 let name = document.getElementById("name");
-let user_name = document.getElementById("user_name");
+let username = document.getElementById("username");
 
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 let submit = document.getElementById("submit");
 
 submit.addEventListener("click", async () => {
-   if(name.value === "" || user_name.value === "" || email.value === "" || password.value === ""){
+   if(name.value === "" || username.value === "" || email.value === "" || password.value === ""){
        alert("All fields are required");
        return;
    }
@@ -23,7 +23,7 @@ submit.addEventListener("click", async () => {
 
     let data = {
          name: name.value,
-         user_name: user_name.value,
+         username: username.value,
          email: email.value,
          password: password.value
     };

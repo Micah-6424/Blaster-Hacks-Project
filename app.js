@@ -1,10 +1,12 @@
 // require packages
 require("dotenv").config(); //for environnement variables
+const mongoose = require('mongoose'); // mongodb database connection
+const sanitize = require('mongo-sanitize'); //cleans user data in case of malicious input
+const session = require("express-session");
+require("passport-local-mongoose");
+const passport = require("passport"); //for authentication
 const express = require("express");
 const app = express();
-const { initializeApp } = require("firebase/app");
-const { getAnalytics } = require("firebase/analytics");
-const { getAuth, createUserWithEmailAndPassword } = require("firebase/auth");
 
 // setup express instance
 const port = process.env.port || 9000;
@@ -16,26 +18,33 @@ app.use(express.json({
 app.use(express.urlencoded({
     extended: true
 }));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
 
-// setup firebase for database
+app.use(passport.initialize());
+app.use(passport.session());
 
-// Import the functions you need from the SDKs you need
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN + ".firebaseapp.com",
-  projectId: process.env.FIREBASE_AUTH_DOMAIN + "",
-  storageBucket: process.env.FIREBASE_AUTH_DOMAIN + ".appspot.com",
-  messagingSenderId: process.env.FIREBASE_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
-};
+// setup mongoDB
+var {
+    User,
+    Post
+} = require("./modules/models.js");
 
-// Initialize Firebase
-const fb = initializeApp(firebaseConfig);
+// setup passport 
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// connect to mongoDB
+mongoose.connect("mongodb://localhost:27017/realOrCake");
+
+
+
+
 // listen to routes
 
 // root route
@@ -48,11 +57,49 @@ app.get("/", (req,res) => {
 app.route("/signup")
 .get((req, res) => {
     res.render("signup");
-}).post((req, res) => {
+}).post(async (req, res) => {
     // get data from request
-    let data = req.body;
-    console.log(data);
+    let {name,username,password,email} = req.body
+
+    // create user with mongo and using passport to hash password
+    let models;
+    try {
+        models = await User.find({email:email});
+    } catch(e) {
+        console.log(e);
+    }
+    console.log(models);
+
+        if (models.length == 0) { //new user
+            User.register({
+                "name":name,
+                "username":username,
+                "email":email
+            }, password, function (err, user) {
+                console.log("user registered");
+                if (err) {
+                    console.log(err);
+                    res.redirect("register err");
+                } else {
+                    passport.authenticate("local")(req, res, function () {
+                        console.log(req.isAuthenticated())
+                        console.log("authenticated");
+                        res.redirect("/secret");
+                    });
+                }
+            });
+        } else { //a user is already registered with that email
+            console.log("user already registered");
+        }
 });
+
+app.get("/secret", (req,res) =>  {
+    console.log(req.isAuthenticated())
+    if(!req.isAuthenticated()){
+        res.send("You are not authenticated");
+    }
+    res.send("You are authenticated");
+})
 
 
 // listen to port
