@@ -28,7 +28,7 @@ submit.addEventListener("click", async () => {
         alert("Description must be at most 500 characters long");
         return;
     }
-    
+
     let data = {
         title: title.value,
         description: description.value,
@@ -48,4 +48,18 @@ submit.addEventListener("click", async () => {
     } else {
         alert("Error creating help request");
     }
+});
+
+// for clicking amount buttons
+let selectedAmount = 0;
+
+document.querySelectorAll(".amount").forEach((button) => {
+    // add event listener to each button to see if it was clicked, if it was, add the class "selected" to it and remove the class from the other buttons
+    button.addEventListener("click", () => {
+        selectedAmount = button.value;
+        document.querySelectorAll(".amount").forEach((button) => {
+            button.classList.remove("button_clicked");
+        });
+        button.classList.add("button_clicked");
+    });
 });
