@@ -1,0 +1,80 @@
+<div class="min_card">
+    <div class="top_bar">
+        <div class="left">
+            <p><%=post.username%></p>
+        </div>
+        <div class="right">
+            <p><%=post.tag%></p>
+        </div>
+    </div>
+
+    <div class="center_content">
+        <p><%=post.title%></p>
+        <div class="summary_container">
+            <div class="summary">
+                <p><%=post.content.length > 80 ? post.content.substr(0,80) + "..." : post.content%></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom_content">
+        <div class="left a">
+            <p><%=Math.round(post.moneyCollected/post.moneyNeeded*100)%>% to goal</p>
+        </div>
+        <div class="right b">
+            <a class="more_info" href="/posts/<%=post._id%>">More Info</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .min_card {
+        width: 300px;
+        height: 300px;
+        border: 1px solid black;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .top_bar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .center_content {
+        text-align: center;
+        position: relative;
+        top: 10%;
+    }
+
+    .summary_container {
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    .summary {
+        width: 80%;
+        
+    }
+
+    .bottom_content {
+        /* make very  bottom of vid*/
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 1%;
+    }
+
+    .a {
+        position: relative;
+        /* right: 5%; */
+    }
+
+    .b {
+        position: relative;
+        left: 85%;
+    }
+</style>

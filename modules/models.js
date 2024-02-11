@@ -23,6 +23,7 @@ const postSchema = new mongoose.Schema({
     moneyNeeded: Number,
     moneyCollected: Number,
     tag: String,
+    username: String,
     time: {
         type: Date,
         default: Date.now

@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+    <%- include('partials/brand_name') %>
+    <%- include('partials/nav_logged_in',{name,username}) %>
+    <!-- create a container for cards, where its 3 per row -->
+    <!-- the cards are already a partal called "min_card" -->
+    <div id="card_grid">
+        <% for(let i = 0; i<posts.length; i++) {%>
+        <%- include('partials/min_card.ejs',{post:posts[i],counter:i}) %>
+        <% } %>
+    </div>
+
+    <style>
+        #card_grid {
+            /* make a structure with even spacing centered horizontally and can change sizes */
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+    </style>
+</body>
+</html>

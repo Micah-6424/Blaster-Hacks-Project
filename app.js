@@ -233,6 +233,7 @@ app.route("/help")
         moneyNeeded: sanitize(asking_price),
         moneyCollected: 0,
         tag: tag,
+        username: req.user.username,
         user: req.user
     });
 
@@ -268,6 +269,12 @@ app.route("/help")
 
 app.route("/feed")
 .get(async (req,res) => {
+    if(!req.isAuthenticated()){
+        res.redirect("/");
+        return;
+    }
+
+
     let posts;
     try {
         posts = await Post.find({});
@@ -281,7 +288,30 @@ app.route("/feed")
     posts.sort((a,b) => {
         return b.time - a.time;
     });
-    res.send({posts: posts});
+
+    let {name,username,email} = req.user;
+    res.render("feed.ejs", {posts: posts, name,username,email});
+});
+
+
+app.route("/post/:id")
+.get(async (req,res) => {
+    if(!req.isAuthenticated()){
+        res.redirect("/");
+        return;
+    }
+
+    let post;
+    try {
+        post = await Post.findById(req.params.id);
+    } catch(e) {
+        console.log(e);
+        res.redirect("/feed");
+        return;
+    }
+
+    let {name,username,email} = req.user;
+    res.render("post.ejs", {post: post, name,username,email});
 });
 
 

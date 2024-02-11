@@ -1,0 +1,12 @@
+.Page {
+  align-items: center;
+}
+.Page .Page_name {
+  text-align: center;
+}
+.Page .Page_name #head {
+  font-size: 800%;
+}
+.Page .Page_name #hr {
+  height: 5px;
+}/*# sourceMappingURL=feed.css.map */
