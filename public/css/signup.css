@@ -1,1 +1,21 @@
-/*# sourceMappingURL=signup.css.map */
+.container {
+  display: flex;
+}
+
+.right-side-container {
+  flex: 0 0 auto;
+  border: 3px solid;
+  height: 100vh;
+  width: 100%;
+  align-self: stretch;
+}
+.right-side-container .s_buttons {
+  border: none;
+}
+
+.left-side-container {
+  left: -50;
+}
+.left-side-container #head {
+  font-size: 500%;
+}/*# sourceMappingURL=signup.css.map */

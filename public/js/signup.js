@@ -1,12 +1,11 @@
-let name = document.getElementById("name");
 let username = document.getElementById("username");
-
-let email = document.getElementById("email");
 let password = document.getElementById("password");
+let email = document.getElementById("email");
+let name = document.getElementById("name");
 let submit = document.getElementById("submit");
 
 submit.addEventListener("click", async () => {
-   if(name.value === "" || username.value === "" || email.value === "" || password.value === ""){
+   if(username.value === ""  || password.value === "" || email.value === "" || name.value === ""){
        alert("All fields are required");
        return;
    }
@@ -16,16 +15,16 @@ submit.addEventListener("click", async () => {
        return;
    }
 
-   if(!email.value.includes("@")){
-       alert("Email is not valid");
+   if(!validateEmail(email.value)){
+       alert("Invalid email");
        return;
-   }
+    }
 
     let data = {
-         name: name.value,
          username: username.value,
          email: email.value,
-         password: password.value
+         password: password.value,
+        name: name.value
     };
 
     let response = await fetch("/signup", {
@@ -35,4 +34,20 @@ submit.addEventListener("click", async () => {
         },
         body: JSON.stringify(data)
     });
+
+    if(response.status === 200){
+        window.location.href = "/";
+        return;
+    }
+
+    if(response.status === 404){
+        alert("Error registering user");
+        return;
+    }
 });
+
+
+function validateEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}

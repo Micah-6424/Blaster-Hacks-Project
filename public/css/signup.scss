@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+}
+
+
+.right-side-container {
+    flex: 0 0 auto;
+    border: 3px solid;
+    height: 100vh;
+    width: 100%;
+    align-self: stretch;
+
+    .s_buttons{
+        border:none;
+    }
+}
+
+.left-side-container {
+    left: -50;
+    #head{
+        font-size: 500%;
+    }
+}

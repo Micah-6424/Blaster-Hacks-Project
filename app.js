@@ -49,26 +49,40 @@ mongoose.connect("mongodb+srv://miga3627:"+ process.env.mongoPassword + "@realor
 
 // root route
 app.get("/", (req,res) => {
-    res.render("home");
+    if(req.user == undefined) { //not logged in
+        res.render("home", {logged_in: false});
+        return;
+    } else {
+        let {name,username,email} = req.user;
+        res.render("home",{logged_in: true,name,username,email});
+        return;
+    }
+    
 })
 // login route
 
 // signup route
 app.route("/signup")
 .get((req, res) => {
+    if(req.isAuthenticated()){
+        res.redirect("/");
+        return;
+    }
     res.render("signup");
 }).post(async (req, res) => {
     if(req.isAuthenticated()){
-        res.redirect("/home");
+        res.redirect("/");
+        return;
     }
 
     // get data from request
     let {name,username,password,email} = req.body
+    console.log("the email::" + email);
 
     // create user with mongo and using passport to hash password
     let models;
     try {
-        models = await User.find({email:email});
+        models = await User.find({username:username.toLowerCase()});
     } catch(e) {
         console.log(e);
     }
@@ -76,19 +90,21 @@ app.route("/signup")
 
         if (models.length == 0) { //new user
             User.register({
-                "name":name,
-                "username":username,
-                "email":email
-            }, password, function (err, user) {
+                "name":sanitize(name),
+                "username":sanitize(username.toLowerCase()),
+                "email":sanitize(email.toLowerCase())
+            }, sanitize(password.toLowerCase()), function (err, user) {
                 console.log("user registered");
                 if (err) {
                     console.log(err);
-                    res.redirect("register err");
+                    res.status.send(404).send("Error registering user");
+                    return;
                 } else {
                     passport.authenticate("local")(req, res, function () {
                         console.log(req.isAuthenticated())
                         console.log("authenticated");
-                        res.redirect("/secret");
+                        res.status(200).send("User registered");
+                        return;
                     });
                 }
             });
@@ -98,18 +114,49 @@ app.route("/signup")
 });
 
 
-app.get("/login", (req,res) => {
+app.route("/login").get((req,res) => {
+        if(req.isAuthenticated()){
+            res.redirect("/");
+            return;
+        }
         res.render("login");
     }).post(async (req, res) => {
         if(req.isAuthenticated()){
-            res.redirect("/home");
+            res.redirect("/");
+            return;
         }
+        // get data from request
+        let {username,password} = req.body;
+        // authenticate user
+        const user = new User({
+            username: username.toLowerCase(),
+            password: password.toLowerCase()
+        });
+
+
+        req.login(user, function (err) {
+            if (err) {
+                console.log(err);
+                res.redirect("/login");
+                return;
+            } else {
+                passport.authenticate("local")(req, res, function () {
+                    console.log(req.isAuthenticated())
+                    console.log("authenticated");
+                    res.redirect("/");
+                    return;
+                });
+            }
+        });
+
+       
 });
 
 app.get("/secret", (req,res) =>  {
     console.log(req.isAuthenticated())
     if(!req.isAuthenticated()){
         res.send("You are not authenticated");
+        return;
     }
 
     // get the current user info
