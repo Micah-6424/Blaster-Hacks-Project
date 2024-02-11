@@ -8,6 +8,7 @@
     <!-- the cards are already a partal called "min_card" -->
     <div id="card_grid">
         <% for(let i = 0; i<posts.length; i++) {%>
+            <% if(posts[i].moneyNeeded <= posts[i].moneyCollected) { continue;} %>
         <%- include('partials/min_card.ejs',{post:posts[i],counter:i}) %>
         <% } %>
     </div>

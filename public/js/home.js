@@ -1,12 +1,12 @@
 let logged_in = document.getElementById("btn-primary") == null;
 
 if(!logged_in){
-
-
+    //    hide the elements that are only for logged in users
 } else { //if logged in
     // remove the hidden class from all the elements that have it
-    document.querySelectorAll(".hidden").forEach((element) => {
-        element.classList.remove("hidden");
+    document.querySelectorAll(".noneee").forEach((element) => {
+        console.log("here!");
+        element.classList.remove("noneee");
     });
     document.getElementById("sign-out").addEventListener("click", async () => {
         let response = await fetch("/logout", {
