@@ -6,15 +6,39 @@
     <header>
         <%- include('partials/brand_name') %>
     </header>
-    <input type="text"name="title" placeholder="title:" id="title">
-    <input type="text"name="description" placeholder="description:" id="description">
     <!-- make a dropdown selector -->
-    <select name="asking_price" id="asking_price">
+    <!--<select name="asking_price" id="asking_price">
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="20">20 </option>
-    </select>
-    <button id="submit">Submit</button>
+    </select>> -->
+    <div class="encompassing"> 
+        <div class="m_buttons">
+            <button class="amount" id="five">$5</button>
+            <button class="amount" id="ten">$10</button>
+            <button class="amount" id="twenty">$20</button>
+    </div>
 
+        <div class="information">
+            <div class="entry1">
+                <input type="text"name="title" placeholder="title:" id="title">
+
+                <input type="text"name="description" placeholder="description:" id="description">
+            </div>
+
+            <div class="entry2">
+
+
+                <select name="tag" id="tag">
+                <%for(let i = 0; i<tags.length; i++) {%>
+                    <option value="<%=tags[i]%>"><%=tags[i]%></option>
+                <%}%>
+                </select>
+
+                <button  id="submit">Submit</button>
+
+            </div>
+        </div>
+    </div>
     <script src="js/help.js"></script>
 </body>

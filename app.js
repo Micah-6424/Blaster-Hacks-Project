@@ -7,6 +7,8 @@ require("passport-local-mongoose");
 const passport = require("passport"); //for authentication
 const express = require("express");
 const app = express();
+let fs = require('fs');
+let path = require('path');
 
 // setup express instance
 const port = process.env.port || 9000;
@@ -173,11 +175,15 @@ app.get("/secret", (req,res) =>  {
 
 app.route("/help")
 .get((req,res) => {
-    if(!req.isAuthenticated()){
-        res.redirect("/");
-        return;
-    }
-    res.render("help");
+    // if(!req.isAuthenticated()){
+    //     res.redirect("/");
+    //     return;
+    // }
+
+
+    // read tags.txt and split by comma into an array
+    let tags = fs.readFileSync(path.join(__dirname, 'tags.txt'), 'utf8').split(",");
+    res.render("help", {tags: tags});
 })
 .post(async (req,res) => {
     if(!req.isAuthenticated()){
