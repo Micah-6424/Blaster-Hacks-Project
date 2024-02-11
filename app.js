@@ -40,7 +40,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // connect to mongoDB
-mongoose.connect("mongodb://localhost:27017/realOrCake");
+mongoose.connect("mongodb+srv://miga3627:"+ process.env.mongoPassword + "@realorcake.2lruhk3.mongodb.net/?retryWrites=true&w=majority");
 
 
 
@@ -98,7 +98,9 @@ app.get("/secret", (req,res) =>  {
     if(!req.isAuthenticated()){
         res.send("You are not authenticated");
     }
-    res.send("You are authenticated");
+
+    // get the current user info
+    res.send(req.user.toString());
 })
 
 

@@ -4,4 +4,7 @@
     --main_green: rgba(168, 174, 116, 1);
     --frame_fill: rgba(255, 255, 255, 0.5);
     --main_font: Cardo;
+
+    margin: 0;
+    padding: 0;
 }
