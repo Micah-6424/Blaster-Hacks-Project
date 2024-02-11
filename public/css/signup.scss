@@ -1,5 +1,6 @@
 .container {
     display: flex;
+    float: left;
 }
 
 
@@ -10,13 +11,30 @@
     width: 100%;
     align-self: stretch;
 
-    .s_buttons{
-        border:none;
+    #name{
+        border: 0;
+        border-bottom: 3px solid;
+    }
+    #username{
+        border: 0;
+        border-bottom: 3px solid;
+    }
+    #email{
+        border: 0;
+        border-bottom: 3px solid;
+    }
+    #password{
+        border: 0;
+        border-bottom: 3px solid;
     }
 }
 
 .left-side-container {
-    left: -50;
+    flex: 0 0 auto;
+    text-align: center;
+    #hr{
+        height: 3px;
+    }
     #head{
         font-size: 500%;
     }

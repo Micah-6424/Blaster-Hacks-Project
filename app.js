@@ -59,6 +59,14 @@ app.get("/", (req,res) => {
     }
     
 })
+// when user tries to logout
+app.post("/logout", (req,res) => {
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
+      return;
+});
 // login route
 
 // signup route

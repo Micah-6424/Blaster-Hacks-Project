@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  float: left;
 }
 
 .right-side-container {
@@ -9,12 +10,29 @@
   width: 100%;
   align-self: stretch;
 }
-.right-side-container .s_buttons {
-  border: none;
+.right-side-container #name {
+  border: 0;
+  border-bottom: 3px solid;
+}
+.right-side-container #username {
+  border: 0;
+  border-bottom: 3px solid;
+}
+.right-side-container #email {
+  border: 0;
+  border-bottom: 3px solid;
+}
+.right-side-container #password {
+  border: 0;
+  border-bottom: 3px solid;
 }
 
 .left-side-container {
-  left: -50;
+  flex: 0 0 auto;
+  text-align: center;
+}
+.left-side-container #hr {
+  height: 3px;
 }
 .left-side-container #head {
   font-size: 500%;
